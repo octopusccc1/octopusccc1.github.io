@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    .a();&amp;#125;.octo2 &amp;#123;    .b();&amp;#125; 输出:123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    color: red;&amp;#125;.octo2 &amp;#123;    color:">
+<meta name="description" content="这篇学习mixin混合集123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    .a();&amp;#125;.octo2 &amp;#123;    .b();&amp;#125; 输出:123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    color: red;&amp;#125;.octo2 &amp;#123">
 <meta name="keywords" content="mixin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="less的mixin">
 <meta property="og:url" content="http://yoursite.com/2018/04/19/less的mixin/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    .a();&amp;#125;.octo2 &amp;#123;    .b();&amp;#125; 输出:123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    color: red;&amp;#125;.octo2 &amp;#123;    color:">
+<meta property="og:description" content="这篇学习mixin混合集123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    .a();&amp;#125;.octo2 &amp;#123;    .b();&amp;#125; 输出:123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    color: red;&amp;#125;.octo2 &amp;#123">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-19T03:19:44.000Z">
+<meta property="og:updated_time" content="2018-04-19T03:21:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="less的mixin">
-<meta name="twitter:description" content="123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    .a();&amp;#125;.octo2 &amp;#123;    .b();&amp;#125; 输出:123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    color: red;&amp;#125;.octo2 &amp;#123;    color:">
+<meta name="twitter:description" content="这篇学习mixin混合集123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    .a();&amp;#125;.octo2 &amp;#123;    .b();&amp;#125; 输出:123456789.a,.b &amp;#123;    color: red;&amp;#125;.octo &amp;#123;    color: red;&amp;#125;.octo2 &amp;#123">
 
 
 
@@ -300,7 +300,7 @@
       
 
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.a,.b &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo &#123;</span><br><span class="line">    .a();</span><br><span class="line">&#125;</span><br><span class="line">.octo2 &#123;</span><br><span class="line">    .b();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>这篇学习mixin混合集<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.a,.b &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo &#123;</span><br><span class="line">    .a();</span><br><span class="line">&#125;</span><br><span class="line">.octo2 &#123;</span><br><span class="line">    .b();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.a,.b &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo2 &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>.a,.b的括号是可选的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.octo &#123;</span><br><span class="line">    .a();</span><br><span class="line">&#125;</span><br><span class="line">//等同于</span><br><span class="line">.octo &#123;</span><br><span class="line">    .a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果创建一个混合集，但是不想直接输出在样式上可以写成a(){}。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.mm &#123;</span><br><span class="line">    color: black;</span><br><span class="line">&#125;</span><br><span class="line">.<span class="function"><span class="title">mmc</span></span>() &#123;</span><br><span class="line">    background: blue;</span><br><span class="line">&#125;</span><br><span class="line">.mmb &#123;</span><br><span class="line">    .mm;</span><br><span class="line">    .mmc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
