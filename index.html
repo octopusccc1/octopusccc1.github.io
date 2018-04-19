@@ -229,6 +229,395 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/less的mixin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="louis zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/19/less的mixin/" itemprop="url">less的mixin</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T10:21:55+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.a,.b &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo &#123;</span><br><span class="line">    .a();</span><br><span class="line">&#125;</span><br><span class="line">.octo2 &#123;</span><br><span class="line">    .b();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.a,.b &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octo2 &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>.a,.b的括号是可选的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.octo &#123;</span><br><span class="line">    .a();</span><br><span class="line">&#125;</span><br><span class="line">//等同于</span><br><span class="line">.octo &#123;</span><br><span class="line">    .a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果创建一个混合集，但是不想直接输出在样式上可以写成a(){}。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.mm &#123;</span><br><span class="line">    color: black;</span><br><span class="line">&#125;</span><br><span class="line">.<span class="function"><span class="title">mmc</span></span>() &#123;</span><br><span class="line">    background: blue;</span><br><span class="line">&#125;</span><br><span class="line">.mmb &#123;</span><br><span class="line">    .mm;</span><br><span class="line">    .mmc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.mm &#123;</span><br><span class="line">    color: black;</span><br><span class="line">&#125;</span><br><span class="line">.mmb &#123;</span><br><span class="line">    color: black;</span><br><span class="line">    background: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>带选择器的混合集<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.<span class="function"><span class="title">mm</span></span>()&#123;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">        border: 1px solid red;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.cc &#123;</span><br><span class="line">    .mm();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.cc:hover &#123;</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>带参数的混合集,也可传多个参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.mm(@color)&#123;</span><br><span class="line">    color: @color;</span><br><span class="line">&#125;</span><br><span class="line">.cc &#123;</span><br><span class="line">    .mm(red);</span><br><span class="line">&#125;</span><br><span class="line">.dd &#123;</span><br><span class="line">    .mm(black);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.cc &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.dd &#123;</span><br><span class="line">    color: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>defalut值<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.mm(@color:red)&#123;</span><br><span class="line">    color: @color;</span><br><span class="line">&#125;</span><br><span class="line">.cc &#123;</span><br><span class="line">    .mm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.cc &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>@arguments<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.box-shadow(@x:0;@y:0;@blur:1px;@color: <span class="comment">#000)&#123;</span></span><br><span class="line">    box-shadow: @arguments;</span><br><span class="line">&#125;</span><br><span class="line">.big &#123;</span><br><span class="line">    .box-shadow(2px;5px)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出 :<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.big&#123;</span><br><span class="line">     box-shadow: 2px 5px 1px <span class="comment">#000;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>作用域<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.<span class="function"><span class="title">mixin</span></span> () &#123;</span><br><span class="line">    @width: 100%;</span><br><span class="line">    @height: 200px;</span><br><span class="line">&#125;</span><br><span class="line">.<span class="built_in">caller</span> &#123;</span><br><span class="line">    .mixin();</span><br><span class="line">    width: @width;</span><br><span class="line">    height: @height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.<span class="built_in">caller</span> &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也可以<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.average(@x,@y)&#123;</span><br><span class="line">    @average:((@x+@y)/2);</span><br><span class="line">&#125;</span><br><span class="line">.aaa &#123;</span><br><span class="line">    .average(16px,50px);</span><br><span class="line">    padding:@average</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ps: 未声明参数（没有默认值的参数）与未申明参数之间用”,”<br>    已申明参数（有默认值的参数)与已声明参数之间用”;”分隔</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/less的extend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="louis zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/19/less的extend/" itemprop="url">less的extend</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T09:56:37+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>学习一下less<br>less 的extend类似于伪类<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.octo &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.cotopus &#123;</span><br><span class="line">    &amp;:extend(.octo);</span><br><span class="line">&#125;</span><br><span class="line">.octopusc:extend(.octo) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.octo,.cotopus,.octopusc &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以嵌套多层的选择器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.octo span&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.cotopus &#123;</span><br><span class="line">    &amp;:extend(.octo span)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.octo span,</span><br><span class="line">.cotopus &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>存在一些坑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.octo .octopu &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.octopus &#123;</span><br><span class="line">    &amp;:extend(.octopu);//这样写是错误的</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@myClass: .octo;</span><br><span class="line">@&#123;myClass&#125;&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.clll &#123;</span><br><span class="line">    color :red;</span><br><span class="line">&#125;</span><br><span class="line">.cooo:extend(.octo) //错误</span><br><span class="line">.cooo:extend(@&#123;myClass&#125;)//错误</span><br><span class="line">.cooo:extend(.clll)//正确</span><br></pre></td></tr></table></figure>
+<p>关于@media,同一个媒体查询下面的可被继承<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@media <span class="built_in">print</span> &#123;</span><br><span class="line">    .pp:extend(.sele)</span><br><span class="line">    .sele &#123;</span><br><span class="line">        color: black;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.sele &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">@media screen &#123;</span><br><span class="line">    .sele &#123;</span><br><span class="line">        color:blue</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@media <span class="built_in">print</span> &#123;</span><br><span class="line">    .pp,</span><br><span class="line">    .sele &#123;</span><br><span class="line">        color: black;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.sele &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">@media screen &#123;</span><br><span class="line">    .sele &#123;</span><br><span class="line">        color:blue</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重复问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.class1,.class2 &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.class3:extend(.class1,.class2)</span><br></pre></td></tr></table></figure></p>
+<p>编译后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.class1,</span><br><span class="line">.class2,</span><br><span class="line">.class3,</span><br><span class="line">.class3 &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可见只填一个就可以不然就会重复</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/redux也写一下吧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="louis zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/18/redux也写一下吧/" itemprop="url">redux也写一下吧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T17:44:31+08:00">
+                2018-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作为react全家桶之一的redux怎么可以少呢?<br>redux写法多样，而我只会一种！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm i react-redux redux --save-dev</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/配置webpack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -782,7 +1171,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -795,7 +1184,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
