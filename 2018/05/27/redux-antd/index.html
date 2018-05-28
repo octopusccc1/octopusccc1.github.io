@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="现在用的UI框架是antd,技术框架用的react,这期东西写完之后做一下积累。用redux+antd来完成表单验证。首先要建三个文件,actions.js,actionTypes.js,reducers.jsactions.js1234// ./$ mkdir actions$ cd actions$ touch actions.js 这个文件是放函数的。 actionTypes.js12//">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redux&amp;antd">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/redux-antd/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="现在用的UI框架是antd,技术框架用的react,这期东西写完之后做一下积累。用redux+antd来完成表单验证。首先要建三个文件,actions.js,actionTypes.js,reducers.jsactions.js1234// ./$ mkdir actions$ cd actions$ touch actions.js 这个文件是放函数的。 actionTypes.js12//">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-28T07:48:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redux&amp;antd">
+<meta name="twitter:description" content="现在用的UI框架是antd,技术框架用的react,这期东西写完之后做一下积累。用redux+antd来完成表单验证。首先要建三个文件,actions.js,actionTypes.js,reducers.jsactions.js1234// ./$ mkdir actions$ cd actions$ touch actions.js 这个文件是放函数的。 actionTypes.js12//">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/redux-antd/"/>
+
+
+
+
+
+  <title>redux&antd | blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/redux-antd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="louis zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">redux&antd</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T23:17:41+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>现在用的UI框架是antd,技术框架用的react,这期东西写完之后做一下积累。<br>用redux+antd来完成表单验证。<br>首先要建三个文件,actions.js,actionTypes.js,reducers.js<br>actions.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// ./</span><br><span class="line">$ mkdir actions</span><br><span class="line">$ <span class="built_in">cd</span> actions</span><br><span class="line">$ touch actions.js</span><br></pre></td></tr></table></figure></p>
+<p>这个文件是放函数的。</p>
+<p>actionTypes.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ./</span><br><span class="line">$ touch actionTypes.js</span><br></pre></td></tr></table></figure></p>
+<p>这个文件是放派发类型的</p>
+<p>reducers.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// ./</span><br><span class="line">$ mkdir reducers</span><br><span class="line">$ <span class="built_in">cd</span> reducers</span><br><span class="line">$ touch reducers.js</span><br></pre></td></tr></table></figure></p>
+<p>这个文件是处理action之后的数据的.</p>
+<p>简单的用login的表单来进行积累。</p>
+<p>login.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">// ./login.js</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import React, &#123; Component &#125; from <span class="string">'react'</span>;</span><br><span class="line">import PropTypes from <span class="string">'prop-types'</span>;</span><br><span class="line">import &#123; Form, Icon, Input, Button, Checkbox, message &#125; from <span class="string">'antd'</span>;</span><br><span class="line">const FormItem = Form.Item;</span><br><span class="line">class Login extends Component &#123;</span><br><span class="line">	constructor(props) &#123;</span><br><span class="line">		super(props)</span><br><span class="line">	&#125;</span><br><span class="line">	handleSubmit = (e) =&gt; &#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">		this.props.form.validateFields((err, values) =&gt; &#123;</span><br><span class="line">			<span class="keyword">if</span> (!err) &#123;</span><br><span class="line">				message.success(<span class="string">'登录成功'</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">		const &#123; getFieldDecorator &#125; = this.props.form;</span><br><span class="line">		<span class="built_in">return</span> (</span><br><span class="line">			&lt;div className=<span class="string">"ant-row login-container"</span>&gt;</span><br><span class="line">				&lt;div className=<span class="string">"login-wrap"</span>&gt;</span><br><span class="line">					&lt;div className=<span class="string">"title"</span>&gt;</span><br><span class="line">						&lt;i className=<span class="string">"iconfont icon-expressionicon logo"</span> /&gt;</span><br><span class="line">						&lt;span className=<span class="string">"name"</span>&gt;yuyou社区&lt;/span&gt;</span><br><span class="line">						&lt;Form onSubmit=&#123;this.handleSubmit&#125; className=<span class="string">"login-form"</span>&gt;</span><br><span class="line">							&lt;FormItem&gt;</span><br><span class="line">								&#123;getFieldDecorator(<span class="string">'username'</span>, &#123;</span><br><span class="line">									rules: [&#123; required: <span class="literal">true</span>, message: <span class="string">'Please input your username!'</span> &#125;],</span><br><span class="line">								&#125;)(</span><br><span class="line">									&lt;Input prefix=&#123;&lt;Icon <span class="built_in">type</span>=<span class="string">"user"</span> autoComplete=<span class="string">"off"</span> style=&#123;&#123; color: <span class="string">'rgba(0,0,0,.25)'</span> &#125;&#125; /&gt;&#125; placeholder=<span class="string">"Username"</span> /&gt;</span><br><span class="line">								)&#125;</span><br><span class="line">							&lt;/FormItem&gt;</span><br><span class="line">							&lt;FormItem&gt;</span><br><span class="line">								&#123;getFieldDecorator(<span class="string">'password'</span>, &#123;</span><br><span class="line">									rules: [&#123; required: <span class="literal">true</span>, message: <span class="string">'Please input your Password!'</span> &#125;],</span><br><span class="line">								&#125;)(</span><br><span class="line">									&lt;Input prefix=&#123;&lt;Icon <span class="built_in">type</span>=<span class="string">"lock"</span> autoComplete=<span class="string">"off"</span> style=&#123;&#123; color: <span class="string">'rgba(0,0,0,.25)'</span> &#125;&#125; /&gt;&#125; <span class="built_in">type</span>=<span class="string">"password"</span> placeholder=<span class="string">"Password"</span> /&gt;</span><br><span class="line">								)&#125;</span><br><span class="line">							&lt;/FormItem&gt;</span><br><span class="line">							&lt;FormItem&gt;</span><br><span class="line">								&lt;Button <span class="built_in">type</span>=<span class="string">"primary"</span> htmlType=<span class="string">"submit"</span> className=<span class="string">"login-form-button"</span>&gt;</span><br><span class="line">									登录</span><br><span class="line">              &lt;/Button&gt;</span><br><span class="line">							&lt;/FormItem&gt;</span><br><span class="line">						&lt;/Form&gt;</span><br><span class="line">					&lt;/div&gt;</span><br><span class="line">				&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">			&lt;/div&gt;</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">const WrappedNormalLoginForm = Form.create(</span><br><span class="line">	&#123;</span><br><span class="line">		onFieldsChange(props, changedFields) &#123;</span><br><span class="line">			props.upDateLoginForm(changedFields)</span><br><span class="line">		&#125;,</span><br><span class="line">		mapPropsToFields(props) &#123;</span><br><span class="line">			const &#123; fields &#125; = props.login</span><br><span class="line">			<span class="built_in">return</span> &#123;</span><br><span class="line">				username: Form.createFormField(&#123;</span><br><span class="line">					...fields.username</span><br><span class="line">				&#125;),</span><br><span class="line">				password: Form.createFormField(&#123;</span><br><span class="line">					...fields.password</span><br><span class="line">				&#125;),</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)(Login);</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default WrappedNormalLoginForm;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; getFieldDecorator &#125; = this.props.form;</span><br></pre></td></tr></table></figure>
+<p>用const { getFieldDecorator } = this.props.form 来从form 引入getFieldDecorator，getFieldDecorator的作用是用于和表单进行双向绑定。</p>
+<p>以下是antd官网解释。</p>
+<p>经过 getFieldDecorator 包装的控件，表单控件会自动添加 value（或 valuePropName 指定的其他属性） onChange（或 trigger 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：</p>
+<p>1、你不再需要也不应该用 onChange 来做同步，但还是可以继续监听 onChange 等事件。</p>
+<p>2、你不能用控件的 value defaultValue 等属性来设置表单域的值，默认值可以用 getFieldDecorator 里的 initialValue。</p>
+<p>3、你不应该用 setState，可以使用 this.props.form.setFieldsValue 来动态改变表单值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;FormItem&gt;</span><br><span class="line">    &#123;getFieldDecorator(<span class="string">'password'</span>, &#123;</span><br><span class="line">        rules: [&#123; required: <span class="literal">true</span>, message: <span class="string">'Please input your Password!'</span> &#125;],</span><br><span class="line">    &#125;)(</span><br><span class="line">        &lt;Input prefix=&#123;&lt;Icon <span class="built_in">type</span>=<span class="string">"lock"</span> autoComplete=<span class="string">"off"</span> style=&#123;&#123; color: <span class="string">'rgba(0,0,0,.25)'</span> &#125;&#125; /&gt;&#125; <span class="built_in">type</span>=<span class="string">"password"</span> placeholder=<span class="string">"Password"</span> /&gt;</span><br><span class="line">    )&#125;</span><br><span class="line">&lt;/FormItem&gt;</span><br></pre></td></tr></table></figure>
+<p>getFieldDecorator接收两个参数，一个是值，另外一个是规则，包括rules，trigger等，详情可以见antd官网。<br>值得一提的是 设置trigger为false就不会收集值。<br>另外比较重要的是必须包裹在<formitem>标签里，表单验证信息才会出现。<br>rules还可以接收函数,如下所示。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rules:[</span><br><span class="line">	&#123;</span><br><span class="line">		validator：this.checkLogin</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></formitem></p>
+<p>之后使用Form的create方法，里面可以使用对象的形式传入配置项。这里使用到了mapPropsToFields，<br>onFieldsChange,其他的方法请见官网的描述.<br>在 onFieldsChange中获取到当前改变的值之后传递到Redux store里，用 mapPropsToFields把值从Redux store里读出来，返回给表单的标记。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const WrappedNormalLoginForm = Form.create(</span><br><span class="line">	&#123;</span><br><span class="line">		onFieldsChange(props, changedFields) &#123;</span><br><span class="line">			props.upDateLoginForm(changedFields)</span><br><span class="line">		&#125;,</span><br><span class="line">		mapPropsToFields(props) &#123;</span><br><span class="line">			const &#123; fields &#125; = props.login</span><br><span class="line">			<span class="built_in">return</span> &#123;</span><br><span class="line">				username: Form.createFormField(&#123;</span><br><span class="line">					...fields.username</span><br><span class="line">				&#125;),</span><br><span class="line">				password: Form.createFormField(&#123;</span><br><span class="line">					...fields.password</span><br><span class="line">				&#125;),</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)(Login);</span><br></pre></td></tr></table></figure></p>
+<p>好了，那么username和 password的值从哪里来？<br>upDateLoginForm从哪儿来？<br>做完这些事情之后我们回到最初的三个文件，<br>// ./actionTypes.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ./actionTypes.js</span><br><span class="line"><span class="built_in">export</span> const UP_DATE_LOGIN_FORM = <span class="string">'login/UP_DATE_LOGIN_FORM'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>在actionTypes.js里定义action的type类型</p>
+<p>// ./actions/actions.js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// ./actions/actions.js</span><br><span class="line">import &#123;</span><br><span class="line">    UP_DATE_LOGIN_FORM</span><br><span class="line">&#125; from <span class="string">'./actionTypes'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const upDateLoginForm = (fields) =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        <span class="built_in">type</span>: UP_DATE_LOGIN_FORM,</span><br><span class="line">        fields</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>把upDateLoginForm方法暴露到props里去，upDateLoginForm接收一个变量，这个变量就是表单的当前变化量。<br>这里的upDateLoginForm就是login.js里面所用到的。<br>// ./<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> reducers</span><br><span class="line">$ touch initialState.js</span><br></pre></td></tr></table></figure></p>
+<p>创建一个名为 initialState.js的文件来存储初始值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// ./reducers/initialState.js</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">    login: &#123;</span><br><span class="line">        fields: &#123;</span><br><span class="line">            username:<span class="string">''</span>,</span><br><span class="line">            password:<span class="string">''</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的username和password就是之前需要用到的。<br>然后在 reducers.js里引入初始值<br>// ./<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// ./reducers/reducers.js</span><br><span class="line">import initialState from <span class="string">'./initialState'</span>;</span><br><span class="line"></span><br><span class="line">import &#123;</span><br><span class="line">    UP_DATE_LOGIN_FORM</span><br><span class="line">&#125; from <span class="string">'../actions/actionTypes'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const login = (state=initialState.login,action)=&gt; &#123;</span><br><span class="line">    switch(action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> UP_DATE_LOGIN_FORM:</span><br><span class="line">        <span class="built_in">return</span> Object.assign(&#123;&#125;,state,&#123;</span><br><span class="line">            fields:&#123;</span><br><span class="line">                ...state.fields,</span><br><span class="line">                ...action.fields</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        default:</span><br><span class="line">        <span class="built_in">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从actionTypes引入UP_DATE_LOGIN_FORM。<br>当类型为 UP_DATE_LOGIN_FORM时，改变 state,传入action里流过来的aciton.fields的值。<br>好了，这些文件都配置好了，那么如何把他们贯穿起来呢，<br>这个时候就需要用到connect和bindActionCreators。<br>connect的作用是连接react组件和redux store，并且它能够传入两个参数mapStateToProps和mapDispatchToProps。<br>bindActionCreators的作用是将一个或多个action和dispatch组合起来生成mapDispatchToProps需要生成的内容。</p>
+<p>这边不在login里面直接使用connect，新建了一个文件夹保持代码的整洁。</p>
+<p>./<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch view.js</span><br></pre></td></tr></table></figure></p>
+<p>在此声明，全篇路径可能有出入，可以直接看我的github代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// ./view.js</span><br><span class="line">import React, &#123; Component, PropTypes &#125; from <span class="string">'react'</span>;</span><br><span class="line">import &#123; connect &#125; from <span class="string">'react-redux'</span>;</span><br><span class="line">import Login from <span class="string">'./Login'</span>;</span><br><span class="line">import * as actions from <span class="string">'../../actions/actions'</span>;</span><br><span class="line">import &#123; bindActionCreators &#125; from <span class="string">'redux'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const mapStateToProps = (state) =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        ...state</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = (dispatch) =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> Object.assign(&#123;&#125;,</span><br><span class="line">        bindActionCreators(actions, dispatch),</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">export</span> default connect(mapStateToProps, mapDispatchToProps)(Login);</span><br></pre></td></tr></table></figure></p>
+<p>这样，action和state就和props绑定了。</p>
+<p>那么似乎少了什么，对，少了顶层容器Provider和store。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import rootReducer from <span class="string">'./rootReducer'</span>;</span><br><span class="line">import &#123; createStore &#125; from <span class="string">'redux'</span>;</span><br><span class="line">const store = createStore(</span><br><span class="line">        rootReducer</span><br><span class="line">    );</span><br><span class="line"><span class="built_in">export</span> default store;</span><br></pre></td></tr></table></figure>
+<p>话说，reducer是可以传入多个reducer的，所以这里用的是rootReducer</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// ./rootReducer.js</span><br><span class="line">import &#123; routerReducer &#125; from <span class="string">'react-router-redux'</span>;</span><br><span class="line">import &#123; combineReducers &#125; from <span class="string">'redux'</span>;</span><br><span class="line">import &#123; login &#125; from <span class="string">'../../../reducers/reducer'</span>;</span><br><span class="line">const rootReducer = combineReducers(&#123;</span><br><span class="line">    routing: routerReducer,</span><br><span class="line">    login</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default rootReducer;</span><br></pre></td></tr></table></figure>
+<p>routerReducer是传入的路由的reducer。<br>login就是之前创建的reducer。(./reducers/reducers.js)</p>
+<p>好最重要的Provider，因为所有的东西都需要在这个底下才能运行，所以最上层容器是很关键的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from <span class="string">'react'</span>;</span><br><span class="line">import PropTypes from <span class="string">'prop-types'</span>;</span><br><span class="line">import &#123; Provider &#125; from <span class="string">'react-redux'</span>;</span><br><span class="line">import DevTools from <span class="string">'../utils/DevTools'</span>;</span><br><span class="line">import &#123; Router &#125; from <span class="string">'react-router'</span>;</span><br><span class="line">import ErrorBoundary from <span class="string">'./ErrorBoundary'</span>;</span><br><span class="line">import &#123; LocaleProvider &#125; from <span class="string">'antd'</span>;</span><br><span class="line">import zhCN from <span class="string">'antd/lib/locale-provider/zh_CN'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default class Root extends Component &#123;</span><br><span class="line">	<span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">		const &#123; store, <span class="built_in">history</span>, routes &#125; = this.props;</span><br><span class="line">		<span class="built_in">return</span> (</span><br><span class="line">			&lt;ErrorBoundary&gt;</span><br><span class="line">				&lt;LocaleProvider locale=&#123;zhCN&#125;&gt;</span><br><span class="line">					&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">						&lt;div className=<span class="string">"dev-react-root"</span>&gt;</span><br><span class="line">							&lt;Router <span class="built_in">history</span>=&#123;<span class="built_in">history</span>&#125; routes=&#123;routes&#125; /&gt;</span><br><span class="line">							&lt;DevTools /&gt;</span><br><span class="line">						&lt;/div&gt;</span><br><span class="line">					&lt;/Provider&gt;</span><br><span class="line">				&lt;/LocaleProvider&gt;</span><br><span class="line">			&lt;/ErrorBoundary&gt;</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Root.propTypes = &#123;</span><br><span class="line">	store: PropTypes.object.isRequired,</span><br><span class="line">	<span class="built_in">history</span>: PropTypes.object.isRequired,</span><br><span class="line">	routes: PropTypes.object.isRequired</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>不关键的代码大家可以忽略(都是一些控制报错，console.log的检验工具），Provider里面需要传入刚才暴露出来的store。<br>好了，就酱紫吧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/22/了解一下vuepress/" rel="next" title="了解一下vuepress">
+                <i class="fa fa-chevron-left"></i> 了解一下vuepress
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">louis zhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">louis zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
