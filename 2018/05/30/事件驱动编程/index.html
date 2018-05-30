@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="jsDoc," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="jsDoc 能自动把注释编译成文档哦！🍎首先是要下载jsDoc咯！1$ cnpm i jsDoc  -g 然后创建一个js 1$ touch add.js 写上一些代码。123function add(a,b)&amp;#123;    return a+b&amp;#125; 这里推荐Document This(VSCode的注释插件，记得改快捷键，因为和mac原生的dock快捷键冲突呀😭)12345678">
-<meta name="keywords" content="jsDoc">
+<meta name="description" content="多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。 1234567891011121314151617181920212223(function test() &amp;#123;    setTimeout(function() &amp;#123; console.log(1) &amp;#125;, 0);     new Promis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习一下jsDoc">
-<meta property="og:url" content="http://yoursite.com/2018/04/19/jsdoc/index.html">
+<meta property="og:title" content="事件驱动编程">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/事件驱动编程/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="jsDoc 能自动把注释编译成文档哦！🍎首先是要下载jsDoc咯！1$ cnpm i jsDoc  -g 然后创建一个js 1$ touch add.js 写上一些代码。123function add(a,b)&amp;#123;    return a+b&amp;#125; 这里推荐Document This(VSCode的注释插件，记得改快捷键，因为和mac原生的dock快捷键冲突呀😭)12345678">
+<meta property="og:description" content="多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。 1234567891011121314151617181920212223(function test() &amp;#123;    setTimeout(function() &amp;#123; console.log(1) &amp;#125;, 0);     new Promis">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/04/19/jsdoc/success.jpeg">
-<meta property="og:updated_time" content="2018-04-19T09:19:31.000Z">
+<meta property="og:updated_time" content="2018-05-30T15:30:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习一下jsDoc">
-<meta name="twitter:description" content="jsDoc 能自动把注释编译成文档哦！🍎首先是要下载jsDoc咯！1$ cnpm i jsDoc  -g 然后创建一个js 1$ touch add.js 写上一些代码。123function add(a,b)&amp;#123;    return a+b&amp;#125; 这里推荐Document This(VSCode的注释插件，记得改快捷键，因为和mac原生的dock快捷键冲突呀😭)12345678">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/19/jsdoc/success.jpeg">
+<meta name="twitter:title" content="事件驱动编程">
+<meta name="twitter:description" content="多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。 1234567891011121314151617181920212223(function test() &amp;#123;    setTimeout(function() &amp;#123; console.log(1) &amp;#125;, 0);     new Promis">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/19/jsdoc/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/事件驱动编程/"/>
 
 
 
 
 
-  <title>学习一下jsDoc | blog</title>
+  <title>事件驱动编程 | blog</title>
   
 
 
@@ -235,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/jsdoc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/事件驱动编程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="louis zhang">
@@ -252,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习一下jsDoc</h1>
+          <h1 class="post-title" itemprop="name headline">事件驱动编程</h1>
         
 
         <div class="post-meta">
@@ -264,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T13:32:34+08:00">
-                2018-04-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T22:40:26+08:00">
+                2018-05-30
               </time>
             
 
@@ -302,13 +299,9 @@
       
 
       
-        <p>jsDoc 能自动把注释编译成文档哦！🍎<br>首先是要下载jsDoc咯！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm i jsDoc  -g</span><br></pre></td></tr></table></figure></p>
-<p>然后创建一个js</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch add.js</span><br></pre></td></tr></table></figure>
-<p>写上一些代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> add(a,b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a+b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里推荐Document This(VSCode的注释插件，记得改快捷键，因为和mac原生的dock快捷键冲突呀😭)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> * </span><br><span class="line"> * @param &#123;any&#125; a </span><br><span class="line"> * @param &#123;any&#125; b </span><br><span class="line"> * @returns</span><br><span class="line"> * @author Louis Zhang &lt;1135530809@qq.com&gt;</span><br><span class="line"> */</span><br><span class="line"><span class="keyword">function</span> add(a,b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a+b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后运行一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jsdoc ./</span><br></pre></td></tr></table></figure></p>
-<p>就会输出在out文件下了，打开里面的index.html就会编译出文档了<br><img src="/2018/04/19/jsdoc/success.jpeg" alt="success"></p>
+        <p>多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">test</span></span>() &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="title">function</span></span>() &#123; console.log(1) &#125;, 0); </span><br><span class="line">    new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">        console.log(2);</span><br><span class="line">        <span class="keyword">for</span> (var i = 0; i &lt; 10000; i++) &#123;</span><br><span class="line">            i == 9999 &amp;&amp; resolve();</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(3);</span><br><span class="line">    &#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">        console.log(4);</span><br><span class="line">        new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">                resolve();</span><br><span class="line">                console.log(5);</span><br><span class="line">            &#125;, 0);</span><br><span class="line">            console.log(6);</span><br><span class="line">        &#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            console.log(7); </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(8);</span><br><span class="line">    <span class="built_in">return</span> 9;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>就这个例子讲事件驱动编程，任务执行分为主任务，宏观任务和微观任务，主任务最优先，其次是微观任务再其次宏观任务。<br>首先，setTimeout调用webikt的timer模块，执行setTimeout，把回调函数加入消息队列，<br>第二步执行 new Promise主线，所以第一个返回2，resolve()是微观任务，所以先返回3，第二个返回的是3，然后执行console.log(8),第三个返回的是8，然后执行微观任务resolve()，执行第一个then,返回4，setTimeout执行，resolve()和console.log(5)加入消息队列，所以先执行console.log(6)，返回6，<br>好了现在所有的事件回调都在消息队列里了，所以先返回 9，这个时候主任务要执行返回消息的任务了，按顺序先是console.log(1)，返回1，接着是console.log(5),返回5，然后是resolve()，返回console.log(7);所以顺序是2，3，8，4，6，9，1，5，7</p>
 
       
     </div>
@@ -324,12 +317,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/jsDoc/" rel="tag"># jsDoc</a>
-          
-        </div>
-      
 
       
       
@@ -339,8 +326,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/19/less的mixin/" rel="next" title="less的mixin">
-                <i class="fa fa-chevron-left"></i> less的mixin
+              <a href="/2018/05/29/express-mongodb-nodejs/" rel="next" title="express&mongodb&nodejs">
+                <i class="fa fa-chevron-left"></i> express&mongodb&nodejs
               </a>
             
           </div>
@@ -348,10 +335,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/22/了解一下vuepress/" rel="prev" title="了解一下vuepress">
-                了解一下vuepress <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
