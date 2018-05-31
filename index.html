@@ -229,6 +229,129 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/react-express-node-mongodb实现前后端分离/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="louis zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/31/react-express-node-mongodb实现前后端分离/" itemprop="url">react&express&node&mongodb实现前后端分离</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T20:36:12+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接着上次的express+node+mongodb实现前后端分离(就登录的表单验证)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 前端页面</span><br><span class="line">// login.js</span><br><span class="line">//只把重要的部分拿出来</span><br><span class="line">//用的是axios</span><br><span class="line">handleSubmit = (e) =&gt; &#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">		const request = axios.create(&#123;</span><br><span class="line">			headers: &#123;</span><br><span class="line">				<span class="string">'Accept'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">				<span class="string">'Content-Type'</span>: <span class="string">'application/json'</span></span><br><span class="line">			  &#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		this.props.form.validateFields((err, values) =&gt; &#123;</span><br><span class="line">			<span class="keyword">if</span> (!err) &#123;</span><br><span class="line">				request(&#123;</span><br><span class="line">					url:<span class="string">'http://localhost:3000/'</span>,</span><br><span class="line">					method: <span class="string">'post'</span>,</span><br><span class="line">					data:&#123;</span><br><span class="line">						user:values.username,</span><br><span class="line">						password:values.password</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;).<span class="keyword">then</span>((res)=&gt;&#123;</span><br><span class="line">                    <span class="keyword">if</span>(res.ret_code==0)&#123;</span><br><span class="line">					    message.success(<span class="string">'登录成功'</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">				&#125;)</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后端页面<br>express<br>解决跨域<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//app.js</span><br><span class="line">var express = require(<span class="string">'express'</span>);</span><br><span class="line">var app = express();</span><br><span class="line">app.all(<span class="string">'*'</span>, <span class="keyword">function</span> (req, res, next) &#123;</span><br><span class="line">  res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">  res.header(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE"</span>);</span><br><span class="line">  res.header(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</span><br><span class="line">  res.header(<span class="string">"X-Powered-By"</span>, <span class="string">' 3.2.1'</span>);</span><br><span class="line">  res.header(<span class="string">"Content-Type"</span>, <span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>路由页面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//server/routes/index.js</span><br><span class="line">var express = require(<span class="string">'express'</span>);</span><br><span class="line"></span><br><span class="line">var router = express.Router();</span><br><span class="line"></span><br><span class="line">var mongoose = require(<span class="string">'mongoose'</span>);</span><br><span class="line">var url = require(<span class="string">"url"</span>);</span><br><span class="line">mongoose.Promise = global.Promise;</span><br><span class="line"></span><br><span class="line">var conn = mongoose.connection.openUri(<span class="string">'mongodb://127.0.0.1:27017/yuyou'</span>);</span><br><span class="line"></span><br><span class="line">var Account = new mongoose.Schema(&#123;</span><br><span class="line">  user: String,</span><br><span class="line">  password: String</span><br><span class="line">&#125;)</span><br><span class="line">var myModel = conn.model(<span class="string">'account'</span>, Account);</span><br><span class="line">router.post(<span class="string">'/'</span>, <span class="keyword">function</span> (req, res, next) &#123;</span><br><span class="line">  </span><br><span class="line">  myModel.findOne(&#123; user: req.body.user, &#125;, <span class="keyword">function</span> (err, doc) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">return</span> res.json(&#123; ret_code: 2, ret_msg: <span class="string">'登录失败'</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!doc) &#123;</span><br><span class="line"></span><br><span class="line">      res.json(&#123; ret_code: 3, ret_msg: <span class="string">'无账号'</span> &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      req.session.regenerate(</span><br><span class="line">        <span class="keyword">function</span> (err) &#123;</span><br><span class="line">          <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="built_in">return</span> res.json(&#123; ret_code: 2, ret_msg: <span class="string">'登录失败'</span> &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (req.body.password != doc.password) &#123;</span><br><span class="line">            res.json(&#123; ret_code: 1, ret_msg: <span class="string">'密码错误'</span> &#125;);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            res.json(&#123; ret_code: 0, ret_msg: <span class="string">'登录成功'</span> &#125;);</span><br><span class="line">            req.session.loginUser = doc.user;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure></p>
+<p>好像也没什么东西要说，之前的文章里都说道了，提一下重点吧,获取前端过来的数据在req.body里。自此能简单的进行前后端交互，但是存session还是有点问题，只作为积累，不作为教程。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/事件驱动编程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -302,7 +425,7 @@
           
             <p>多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">test</span></span>() &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="title">function</span></span>() &#123; console.log(1) &#125;, 0); </span><br><span class="line">    new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">        console.log(2);</span><br><span class="line">        <span class="keyword">for</span> (var i = 0; i &lt; 10000; i++) &#123;</span><br><span class="line">            i == 9999 &amp;&amp; resolve();</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(3);</span><br><span class="line">    &#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">        console.log(4);</span><br><span class="line">        new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">                resolve();</span><br><span class="line">                console.log(5);</span><br><span class="line">            &#125;, 0);</span><br><span class="line">            console.log(6);</span><br><span class="line">        &#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            console.log(7); </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(8);</span><br><span class="line">    <span class="built_in">return</span> 9;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-<p>就这个例子讲事件驱动编程，任务执行分为主任务，宏观任务和微观任务，主任务最优先，其次是微观任务再其次宏观任务。<br>首先，setTimeout调用webikt的timer模块，执行setTimeout，把回调函数加入消息队列，<br>第二步执行 new Promise主线，所以第一个返回2，resolve()是微观任务，所以先返回3，第二个返回的是3，然后执行console.log(8),第三个返回的是8，然后执行微观任务resolve()，执行第一个then,返回4，setTimeout执行，resolve()和console.log(5)加入消息队列，所以先执行console.log(6)，返回6，<br>好了现在所有的事件回调都在消息队列里了，所以先返回 9，这个时候主任务要执行返回消息的任务了，按顺序先是console.log(1)，返回1，接着是console.log(5),返回5，然后是resolve()，返回console.log(7);所以顺序是2，3，8，4，6，9，1，5，7</p>
+<p>就这个例子讲事件驱动编程，任务执行分为主任务，宏观任务和微观任务，主任务最优先，其次是微观任务再其次宏观任务。<br>首先，setTimeout调用webikt的timer模块，执行setTimeout，把回调函数加入消息队列，<br>第二步执行 new Promise主线，所以第一个返回2，resolve()是微观任务，所以先返回3，第二个返回的是3，然后执行console.log(8),第三个返回的是8，然后执行微观任务resolve()，执行第一个then,返回4，setTimeout执行，resolve()和console.log(5)加入消息队列，所以先执行console.log(6)，返回6，<br>好了现在所有的事件回调都在消息队列里了，所以先返回 9，这个时候主任务要执行返回消息的任务了，按顺序先是console.log(1)，返回1，接着是console.log(5),返回5，然后是resolve()，返回console.log(7);所以顺序是2，3，8，4，6，9，1，5，7.</p>
 
           
         
@@ -1422,137 +1545,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/写一下react-router/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="louis zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/18/写一下react-router/" itemprop="url">写一下react-router</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T13:43:27+08:00">
-                2018-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天写一个用react-router来完成一个单页面应用<br>基于之前的reactdemo来写，如果有需要的同学可以跳转，这里就不在复述了。<br>由于4+的版本Route写法不同，我还没有进行学习，所以这边使用的是3.0.5的版本。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm i react-router@3.0.5 --save-dev</span><br></pre></td></tr></table></figure></p>
-<p>首先我们要在src目录下建立一个component和router文件夹。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir component</span><br><span class="line">$ mkdir router</span><br></pre></td></tr></table></figure></p>
-<p>进入component<br>创建路口文件Local<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> component </span><br><span class="line">$ touch Local.js</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//./src/component/Local.js</span><br><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import &#123; Link &#125; from <span class="string">'react-router'</span>;</span><br><span class="line">class Local extends React.Component &#123;</span><br><span class="line">    constructor(props)&#123;</span><br><span class="line">        super(props)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;Link to=<span class="string">"/firstPage/"</span>&gt;&lt;button&gt;to First&lt;/button&gt;&lt;/Link&gt;</span><br><span class="line">                &lt;Link to=<span class="string">"/secondPage/"</span>&gt;&lt;button&gt;to Second&lt;/button&gt;&lt;/Link&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &#123;this.props.children&#125;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default Local;</span><br></pre></td></tr></table></figure>
-<p>然后在component文件夹下面创建两个组件；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir FirstPage</span><br><span class="line">$ touch FirstPage.js</span><br><span class="line">$ vim FirstPage.js</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//./src/component/FirstPage/FirstPage.js</span><br><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">class FirstPage extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">               我是第一页</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default FirstPage;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir SecondPage</span><br><span class="line">$ touch SecondPage.js</span><br><span class="line">$ vim SecondPage.js</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//./src/component/SecondPage/SecondPage.js</span><br><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">class SecondPage extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                我是第二页</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default SecondPage;</span><br></pre></td></tr></table></figure>
-<p>好了，组件和入口文件已经都配置好了，现在就要配置路由了；<br>然后打开在上一次react介绍中创建的src/index.js文件；<br>将代码改成如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import ReactDOM from <span class="string">'react-dom'</span>;</span><br><span class="line">import RouteMap from <span class="string">'./router/router'</span>;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            &lt;RouteMap/&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(&lt;App/&gt;,document.getElementById(<span class="string">"react-app"</span>))</span><br></pre></td></tr></table></figure></p>
-<p>运行一下吧！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm start</span><br></pre></td></tr></table></figure></p>
-<p>补充一个文件的内容mapRouter。(我真的不是故意的！)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import Local from <span class="string">"../component/Local"</span>;</span><br><span class="line">import &#123;Router,Route,IndexRoute,browserHistory,IndexRedirect&#125; from <span class="string">'react-router'</span></span><br><span class="line">import FirstPage from <span class="string">"../component/FirstPage/FirstPage"</span>;</span><br><span class="line">import SecondPage from <span class="string">"../component/SecondPage/SecondPage"</span>;</span><br><span class="line">class RouteMap extends React.Component&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span></span>()&#123;</span><br><span class="line">      <span class="built_in">return</span>(</span><br><span class="line">          &lt;Router <span class="built_in">history</span>=&#123;browserHistory&#125;&gt;</span><br><span class="line">              &lt;Route path=<span class="string">'/'</span> component=&#123;Local&#125;&gt;</span><br><span class="line">                  &lt;IndexRoute component=&#123;FirstPage&#125;/&gt;</span><br><span class="line">                  &lt;Route path=<span class="string">'/FirstPage'</span> component=&#123;FirstPage&#125;/&gt;</span><br><span class="line">                  &lt;Route path=<span class="string">'/SecondPage'</span> component=&#123;SecondPage&#125;/&gt;</span><br><span class="line">              &lt;/Route&gt;</span><br><span class="line">          &lt;/Router&gt;</span><br><span class="line">      )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default RouteMap;</span><br></pre></td></tr></table></figure></p>
-<p>这里要说明一点的是 hashHistory路由模式是前端锚点控制的，而browserHistroy则是依赖于服务端的，所以你去地址栏刷新页面的时候会找不到页面</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1603,7 +1595,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

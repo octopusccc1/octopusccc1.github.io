@@ -229,6 +229,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/写一下react-router/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="louis zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/18/写一下react-router/" itemprop="url">写一下react-router</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T13:43:27+08:00">
+                2018-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天写一个用react-router来完成一个单页面应用<br>基于之前的reactdemo来写，如果有需要的同学可以跳转，这里就不在复述了。<br>由于4+的版本Route写法不同，我还没有进行学习，所以这边使用的是3.0.5的版本。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm i react-router@3.0.5 --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>首先我们要在src目录下建立一个component和router文件夹。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir component</span><br><span class="line">$ mkdir router</span><br></pre></td></tr></table></figure></p>
+<p>进入component<br>创建路口文件Local<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> component </span><br><span class="line">$ touch Local.js</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//./src/component/Local.js</span><br><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import &#123; Link &#125; from <span class="string">'react-router'</span>;</span><br><span class="line">class Local extends React.Component &#123;</span><br><span class="line">    constructor(props)&#123;</span><br><span class="line">        super(props)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;Link to=<span class="string">"/firstPage/"</span>&gt;&lt;button&gt;to First&lt;/button&gt;&lt;/Link&gt;</span><br><span class="line">                &lt;Link to=<span class="string">"/secondPage/"</span>&gt;&lt;button&gt;to Second&lt;/button&gt;&lt;/Link&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &#123;this.props.children&#125;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default Local;</span><br></pre></td></tr></table></figure>
+<p>然后在component文件夹下面创建两个组件；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir FirstPage</span><br><span class="line">$ touch FirstPage.js</span><br><span class="line">$ vim FirstPage.js</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//./src/component/FirstPage/FirstPage.js</span><br><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">class FirstPage extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">               我是第一页</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default FirstPage;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir SecondPage</span><br><span class="line">$ touch SecondPage.js</span><br><span class="line">$ vim SecondPage.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//./src/component/SecondPage/SecondPage.js</span><br><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">class SecondPage extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                我是第二页</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default SecondPage;</span><br></pre></td></tr></table></figure>
+<p>好了，组件和入口文件已经都配置好了，现在就要配置路由了；<br>然后打开在上一次react介绍中创建的src/index.js文件；<br>将代码改成如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import ReactDOM from <span class="string">'react-dom'</span>;</span><br><span class="line">import RouteMap from <span class="string">'./router/router'</span>;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            &lt;RouteMap/&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(&lt;App/&gt;,document.getElementById(<span class="string">"react-app"</span>))</span><br></pre></td></tr></table></figure></p>
+<p>运行一下吧！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm start</span><br></pre></td></tr></table></figure></p>
+<p>补充一个文件的内容mapRouter。(我真的不是故意的！)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import Local from <span class="string">"../component/Local"</span>;</span><br><span class="line">import &#123;Router,Route,IndexRoute,browserHistory,IndexRedirect&#125; from <span class="string">'react-router'</span></span><br><span class="line">import FirstPage from <span class="string">"../component/FirstPage/FirstPage"</span>;</span><br><span class="line">import SecondPage from <span class="string">"../component/SecondPage/SecondPage"</span>;</span><br><span class="line">class RouteMap extends React.Component&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span></span>()&#123;</span><br><span class="line">      <span class="built_in">return</span>(</span><br><span class="line">          &lt;Router <span class="built_in">history</span>=&#123;browserHistory&#125;&gt;</span><br><span class="line">              &lt;Route path=<span class="string">'/'</span> component=&#123;Local&#125;&gt;</span><br><span class="line">                  &lt;IndexRoute component=&#123;FirstPage&#125;/&gt;</span><br><span class="line">                  &lt;Route path=<span class="string">'/FirstPage'</span> component=&#123;FirstPage&#125;/&gt;</span><br><span class="line">                  &lt;Route path=<span class="string">'/SecondPage'</span> component=&#123;SecondPage&#125;/&gt;</span><br><span class="line">              &lt;/Route&gt;</span><br><span class="line">          &lt;/Router&gt;</span><br><span class="line">      )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default RouteMap;</span><br></pre></td></tr></table></figure></p>
+<p>这里要说明一点的是 hashHistory路由模式是前端锚点控制的，而browserHistroy则是依赖于服务端的，所以你去地址栏刷新页面的时候会找不到页面</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/about-react/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -528,7 +659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

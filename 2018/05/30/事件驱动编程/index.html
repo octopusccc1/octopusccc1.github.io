@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="blog">
 <meta property="og:description" content="多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。 1234567891011121314151617181920212223(function test() &amp;#123;    setTimeout(function() &amp;#123; console.log(1) &amp;#125;, 0);     new Promis">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-30T15:30:17.000Z">
+<meta property="og:updated_time" content="2018-05-31T08:34:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件驱动编程">
 <meta name="twitter:description" content="多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。 1234567891011121314151617181920212223(function test() &amp;#123;    setTimeout(function() &amp;#123; console.log(1) &amp;#125;, 0);     new Promis">
@@ -301,7 +301,7 @@
       
         <p>多线程执行时遇到加载缓慢耗时的任务时就会分配给其他线程来执行，而单线程则是通过异步分配给客户端处理再返回给主进程发出从而完成任务。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">test</span></span>() &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="title">function</span></span>() &#123; console.log(1) &#125;, 0); </span><br><span class="line">    new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">        console.log(2);</span><br><span class="line">        <span class="keyword">for</span> (var i = 0; i &lt; 10000; i++) &#123;</span><br><span class="line">            i == 9999 &amp;&amp; resolve();</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(3);</span><br><span class="line">    &#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">        console.log(4);</span><br><span class="line">        new Promise(<span class="keyword">function</span>(resolve) &#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">                resolve();</span><br><span class="line">                console.log(5);</span><br><span class="line">            &#125;, 0);</span><br><span class="line">            console.log(6);</span><br><span class="line">        &#125;).<span class="keyword">then</span>(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            console.log(7); </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(8);</span><br><span class="line">    <span class="built_in">return</span> 9;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-<p>就这个例子讲事件驱动编程，任务执行分为主任务，宏观任务和微观任务，主任务最优先，其次是微观任务再其次宏观任务。<br>首先，setTimeout调用webikt的timer模块，执行setTimeout，把回调函数加入消息队列，<br>第二步执行 new Promise主线，所以第一个返回2，resolve()是微观任务，所以先返回3，第二个返回的是3，然后执行console.log(8),第三个返回的是8，然后执行微观任务resolve()，执行第一个then,返回4，setTimeout执行，resolve()和console.log(5)加入消息队列，所以先执行console.log(6)，返回6，<br>好了现在所有的事件回调都在消息队列里了，所以先返回 9，这个时候主任务要执行返回消息的任务了，按顺序先是console.log(1)，返回1，接着是console.log(5),返回5，然后是resolve()，返回console.log(7);所以顺序是2，3，8，4，6，9，1，5，7</p>
+<p>就这个例子讲事件驱动编程，任务执行分为主任务，宏观任务和微观任务，主任务最优先，其次是微观任务再其次宏观任务。<br>首先，setTimeout调用webikt的timer模块，执行setTimeout，把回调函数加入消息队列，<br>第二步执行 new Promise主线，所以第一个返回2，resolve()是微观任务，所以先返回3，第二个返回的是3，然后执行console.log(8),第三个返回的是8，然后执行微观任务resolve()，执行第一个then,返回4，setTimeout执行，resolve()和console.log(5)加入消息队列，所以先执行console.log(6)，返回6，<br>好了现在所有的事件回调都在消息队列里了，所以先返回 9，这个时候主任务要执行返回消息的任务了，按顺序先是console.log(1)，返回1，接着是console.log(5),返回5，然后是resolve()，返回console.log(7);所以顺序是2，3，8，4，6，9，1，5，7.</p>
 
       
     </div>
@@ -335,6 +335,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/31/react-express-node-mongodb实现前后端分离/" rel="prev" title="react&express&node&mongodb实现前后端分离">
+                react&express&node&mongodb实现前后端分离 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -402,7 +406,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
